@@ -1,0 +1,325 @@
+{
+  "intents": [],
+  "entities": [
+    {
+      "entity": "serviceing",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "Bookservice",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "bike_number",
+          "synonyms": []
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "purchasing",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "car",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "bike",
+          "synonyms": []
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "menu",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "purchase",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "feedback",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "exit",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "service",
+          "synonyms": []
+        }
+      ],
+      "fuzzy_match": true
+    }
+  ],
+  "metadata": {
+    "api_version": {
+      "major_version": "v2",
+      "minor_version": "2018-11-08"
+    }
+  },
+  "dialog_nodes": [
+    {
+      "type": "standard",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Thanks for showing Interest , please provide your Bike Number"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_9_1594488168935",
+      "conditions": "@serviceing:Bookservice",
+      "dialog_node": "node_6_1594488436789"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Please select the Engine Power of your choice"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_2_1594488121906",
+      "conditions": "@purchasing:bike",
+      "dialog_node": "node_10_1594532843400",
+      "previous_sibling": "node_1_1594488641326"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Please select the Engine Power of your choice"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_2_1594488121906",
+      "conditions": "@purchasing:car",
+      "dialog_node": "node_1_1594488641326"
+    },
+    {
+      "type": "standard",
+      "parent": "node_6_1594488436789",
+      "conditions": "@serviceing:bike_number",
+      "dialog_node": "node_4_1594533003692"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Great...\nAs the manufacturer of legendary \"Yamaha\" we are committed to highest level of quality. We ensure that these quality don't get diluted during after sales service\nTo Book a service please click at BookService"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "Welcome",
+      "conditions": "@menu:service",
+      "dialog_node": "node_9_1594488168935",
+      "previous_sibling": "node_2_1594488121906"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Sure!! Please choose the category that you are looking to purchase"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          },
+          {
+            "title": "",
+            "options": [
+              {
+                "label": "car",
+                "value": {
+                  "input": {
+                    "text": "car"
+                  }
+                }
+              },
+              {
+                "label": "bike",
+                "value": {
+                  "input": {
+                    "text": "bike"
+                  }
+                }
+              }
+            ],
+            "response_type": "option"
+          }
+        ]
+      },
+      "parent": "Welcome",
+      "conditions": "@menu:purchase",
+      "dialog_node": "node_2_1594488121906",
+      "previous_sibling": "node_9_1594488022422"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Your valuable feedback is very important for us. We value it and this helps us to serve you better.\nPlease take a few minutes to give us feedback about our service. We are conducting this research in order to measure your level of satisfaction with the quality of our service."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "Welcome",
+      "conditions": "@menu:feedback",
+      "dialog_node": "node_9_1594488022422"
+    },
+    {
+      "type": "standard",
+      "title": "Anything else",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "I didn't understand. You can try rephrasing."
+              },
+              {
+                "text": "Can you reword your statement? I'm not understanding."
+              },
+              {
+                "text": "I didn't get your meaning."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "anything_else",
+      "dialog_node": "Anything else",
+      "previous_sibling": "Welcome",
+      "disambiguation_opt_out": true
+    },
+    {
+      "type": "standard",
+      "title": "Welcome",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Empowered by a passion for innovation, We create exceptional value and experiences that enrich the lives of our customers.\n\n<iframe width=\"420\" height=\"315\" src=\"https://www.youtube.com/embed/tgbNymZ7vqY autoplay=1\">\n</iframe>"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          },
+          {
+            "title": "",
+            "options": [
+              {
+                "label": "feedback",
+                "value": {
+                  "input": {
+                    "text": "feedback"
+                  }
+                }
+              },
+              {
+                "label": "purchase",
+                "value": {
+                  "input": {
+                    "text": "purchase"
+                  }
+                }
+              },
+              {
+                "label": "service",
+                "value": {
+                  "input": {
+                    "text": "service"
+                  }
+                }
+              },
+              {
+                "label": "exit",
+                "value": {
+                  "input": {
+                    "text": "exit"
+                  }
+                }
+              }
+            ],
+            "response_type": "option"
+          }
+        ]
+      },
+      "conditions": "welcome",
+      "dialog_node": "Welcome"
+    }
+  ],
+  "counterexamples": [],
+  "system_settings": {
+    "off_topic": {
+      "enabled": true
+    },
+    "disambiguation": {
+      "prompt": "Did you mean:",
+      "enabled": true,
+      "randomize": true,
+      "max_suggestions": 5,
+      "suggestion_text_policy": "title",
+      "none_of_the_above_prompt": "None of the above"
+    },
+    "system_entities": {
+      "enabled": true
+    },
+    "human_agent_assist": {
+      "prompt": "Did you mean:"
+    },
+    "spelling_auto_correct": true
+  },
+  "learning_opt_out": false,
+  "name": "work_1",
+  "language": "en",
+  "description": ""
+}
